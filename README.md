@@ -4,7 +4,7 @@ This is a web scraper for jobs on JobsDB.com HK.
 
 # Libraries/Frameworks Used
 
-Scraper: Beautiful Soup, Selenium, SQL Server
+Scraper: Beautiful Soup, Selenium, SQL Server\n
 Data Analysis: Jupyter Notebook, Pandas, Numpy, Matplotlib, Seaborn
 
 # Credits
