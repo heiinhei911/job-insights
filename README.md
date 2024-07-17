@@ -14,9 +14,11 @@ This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-d
 
     ![Number Of Pages Being Searched Input](./images/number_of_jobs_being_searched.png)
 
-4.  Wait till all the pages finish processing and all the data will be saved in _\[the keyword you have inputted in step 2\].csv_ under the `/jobs/` directory
+4.  Now we wait!
 
     _(This step could take quite a while depending on a number of factors such as the number of job postings you are scraping, your internet speed, the specification of your machine, etc.)_
+
+5.  Once all the pages have finished processing, all the data will be saved in _\[the keyword you have inputted in step 2\].csv_ under the `/jobs/` directory
 
     ![Scraping Completed](./images/scraping_completed.png)
 
