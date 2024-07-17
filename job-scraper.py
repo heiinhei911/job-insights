@@ -12,17 +12,28 @@ import time
 from dateparser import parse
 import math
 import re
+from pathlib import Path
 
+# Define global constants
 BASE_URL = "https://hk.jobsdb.com"
+OUTPUT_PATH = "./jobs/"
+JOB_POSTINGS_PER_PAGE = 26
+
+# Initialize variables
 job = ""
 job_combined = ""
 job_ids = []
 total_jobs_count = ""
 last_avail_page = 0
+csv_full_path = ""
 
 driver = webdriver.Chrome()
 page = None
 html = None
+
+def update_csv_full_path():
+    global csv_full_path
+    csv_full_path = OUTPUT_PATH + job_combined + ".csv"
 
 def load_DOM():
     global html
@@ -35,18 +46,15 @@ def get_page_contents(cur_page):
 
     # Get HTML Content
     # page = requests.get(url)
+    # html = list(soup.children)[2]
     driver.get(url)
     load_DOM()
-    # html = list(soup.children)[2]
-    # print(html.prettify())
 
     # Get job postings and their details
     search_results = html.select_one('div[data-automation="searchResults"]')
     split_view = list(search_results.select_one('div[data-automation="splitViewParentWrapper"] > div').children)
     # print(split_view)
     job_listings_wrapper = split_view[0]
-    # job_details_wrapper = split_view[1]
-    # print(job_details_wrapper.select_one('div[data-automation="jobDetailsPage"]'))
     return job_listings_wrapper
 
 def get_total_jobs_count():
@@ -71,19 +79,13 @@ def retrieve_jobs(job_listings_wrapper):
             WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[data-automation="jobAdDetails"]')))
             load_DOM()
             requirements_list = [li.get_text() for li in html.select_one('div[data-automation="jobAdDetails"]').select("li")]
-            # requirments_tag = html.select_one(':-soup-contains("Requirements:")')
-            # requirments_list = requirments_tag.findParent().next_sibling()
             for req in requirements_list:
                 req_lowered = req.lower()
-                # if keywords in req:
                 if "year" in req_lowered:
-                    # job_experience = req[:req_lowered.index("year")].replace("–", "to")
                     years_of_exp_idx = re.search(r"\d", req)
                     job_experience = req[years_of_exp_idx.start()] if years_of_exp_idx is not None else None
-                    # print(years_of_exp_idx, job_experience)
                 elif any(keyword in req_lowered for keyword in ["fresh", "less"]):
                     job_fresh_grad = True
-                    # print(req, job_fresh_grad)
         except Exception as e:
 
             print("ERROR: ", e)
@@ -118,39 +120,36 @@ def retrieve_jobs(job_listings_wrapper):
 
     export_job_listings(job_listings)
 
-    # print(job_listings)
-
 def export_job_listings(job_listings):
     df = pd.DataFrame(job_listings)
-    df.to_csv(job_combined + ".csv", mode="a", index=False, header=False)
+    df.to_csv(csv_full_path, mode="a", index=False, header=False)
 
 while not job:
     job = input("Type in the key word that you want to search for: ")
 job_combined = job.replace(" ", "-")
+update_csv_full_path()
 
+# Create "./jobs/" directory if not already exists and
 # Create blank csv file (and overwrite old one if already exists)
-pd.DataFrame({}, columns=["Title", "Company", "Min. Years of Exp. Required", "Fresh Grad", "Location", "Classification", "Salary", "Posted Date", "Job ID", "URL"]).to_csv(job_combined + ".csv", index=False, date_format="%Y%m%d %h%m")
+Path(OUTPUT_PATH).mkdir(parents=True, exist_ok=True)
+pd.DataFrame({}, columns=["Title", "Company", "Min. Years of Exp. Required", "Fresh Grad/Less Exp.", "Location", "Classification", "Salary", "Posted Date", "Job ID", "URL"]).to_csv(csv_full_path, index=False, date_format="%Y%m%d %h%m")
 
 search_extent = ""
 total_jobs_count = get_total_jobs_count()
-max_page_count = math.ceil(int(total_jobs_count) / 26)
+max_page_count = math.ceil(int(total_jobs_count) / JOB_POSTINGS_PER_PAGE)
 
 search_extent = input("\nThe total number of jobs found was: {0}\nType 'all' to search all jobs OR type in the number of page you want to search (MAX is {1}): ".format(total_jobs_count, str(max_page_count)))
 
 try:
+    # validation for Numeric input
     while int(search_extent) > max_page_count or int(search_extent) <= 0:
-        search_extent = input("\nThe total number of jobs found was: {0}\nType 'all' to search all jobs OR type in the number of page you want to search (MAX is {1}): ".format(total_jobs_count, str(max_page_count)))
+        search_extent = input("\nThe total number of jobs found was: {0}\nType 'all' to search all jobs OR type in the number of pages you want to search (MAX is {1}): ".format(total_jobs_count, str(max_page_count)))
     search_extent = int(search_extent)
 except(ValueError):
-    # all
+    # validation for "all"
     while search_extent.lower() != "all":
         search_extent = input("\nThe total number of jobs found was: {0}\nType 'all' to search all jobs OR type in the number of page you want to search (MAX is {1}): ".format(total_jobs_count, str(max_page_count)))
     search_extent = max_page_count
-
-# while search_extent != "all" or int(search_extent) > max_page_count or int(search_extent) <= 0:
-#     search_extent = input("\nThe total number of jobs found was: {0}\nType 'all' to search all jobs OR type in the number of page you want to search (MAX is {1}): ".format(total_jobs_count, str(max_page_count)))
-
-# keywords = input("Please type in the keywords (seperated by commas) that you want to search in the experience section: ")
 
 for i in range(1, search_extent+1):
     # try:
@@ -160,9 +159,6 @@ for i in range(1, search_extent+1):
         time.sleep(0.5)
     # except Exception as e:
     #     print("ERROR at: ", i, e)
-    #     last_avail_page = i
-    #     # error_pages.append(i)
     #     break
-# print(job_listings)
-print("DONE!! -> " + job + ("\n--Cut short to page: " + str(last_avail_page) if last_avail_page > 0 else ""))
+print("\nDONE!! Output saved to '" + csv_full_path + "'" + ("\n--Cut short to page: " + str(last_avail_page) if last_avail_page > 0 else ""))
 driver.quit()
