@@ -30,4 +30,6 @@ Data Analysis: Python, Jupyter Notebook, Pandas, Numpy, Matplotlib, Seaborn
 
 # Credits
 
-This project and its data are intended for educational purposes only. All data come from JobsDB.com HK. All rights reserved to JobsDB.com HK.
+This project and its data are intended for educational purposes only.
+
+All data come from JobsDB.com HK. All rights reserved to JobsDB.com HK.
