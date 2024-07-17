@@ -4,6 +4,15 @@ This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-d
 
 # How to Use
 
+## Setting up the Environment
+
+1.  Clone the respository to your local machine. One way to do it is to pick a location on your local machine where you want the respository to clone to (e.g., the desktop) and type `git clone https://github.com/heiinhei911/job-insights.git` into the terminal
+2.  Change your current directory `cd` to the location of the cloned respository on your local machine (e.g., `cd Desktop/job-insights`)
+3.  _(Optional)_ Create a virtual environment for the cloned respository (e.g., venv, conda)
+4.  _(Under the virtual env. if you have created one in step 3)_ Type `pip install -r requirements.txt`. This will install all the necessary packages and modules so that the program can run properly
+
+## Using the Program
+
 1.  Run the program by running `python job-scraper.py` in the terminal
 2.  Enter the keyword that you would like to search for (e.g., business analyst)
 
