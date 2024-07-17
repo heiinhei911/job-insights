@@ -1,4 +1,4 @@
-# Job Insights
+# Job Insights - Job Scraper & Data Analysis
 
 This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-depth analysis and visualization on current market data to uncover insights that can help job seekers and employers better understand employment trends.
 
