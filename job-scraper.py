@@ -38,6 +38,12 @@ def update_csv_full_path():
     global csv_full_path
     csv_full_path = "{0}{1}_{2}.csv".format(OUTPUT_PATH, job_combined, date.today().strftime("%Y%m%d"))
 
+    # Create a new csv with "-[number]" at the end if a file with the same name already exists
+    i = 2
+    while Path(csv_full_path).is_file():
+        csv_full_path = "{0}{1}_{2}-{3}.csv".format(OUTPUT_PATH, job_combined, date.today().strftime("%Y%m%d"), i)
+        i += 1
+
 def load_DOM():
     # Initialize the DOM
     global html
