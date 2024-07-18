@@ -2,16 +2,22 @@
 
 This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-depth analysis and visualization on current market data to uncover insights that can help job seekers and employers better understand employment trends.
 
-# How to Use
+This project is split into two parts: the **Job Scraper** and the **Data Analysis** using the data scraped from the first part.
 
-## Setting up the Environment
+# Part I - Job Scraper
+
+The program in this part scrapes for full-time jobs that are found under a particular keyword on JobsDB.com HK and stores the scraped data in a csv.
+
+## How to Use
+
+### Setting up the Environment
 
 1.  Clone the respository to your local machine. One way to do it is to pick a location on your local machine where you want the respository to clone to (e.g., the desktop) and type `git clone https://github.com/heiinhei911/job-insights.git` into the terminal
 2.  Change your current directory `cd` to the location of the cloned respository on your local machine (e.g., `cd Desktop/job-insights`)
 3.  _(Optional)_ Create a virtual environment for the cloned respository (e.g., venv, conda)
 4.  _(Under the virtual env. if you have created one in step 3)_ Type `pip install -r requirements.txt`. This will install all the necessary packages and modules so that the program can run properly
 
-## Using the Program
+### Using the Program
 
 1.  Run the program by running `python job-scraper.py` in the terminal
 2.  Enter the keyword that you would like to search for (e.g., business analyst)
@@ -31,11 +37,19 @@ This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-d
 
     ![Scraping Completed](./images/scraping_completed.png)
 
+# Part II - Data Analysis
+
+This part involves data cleansing, exploratory data analysis, and some feature extractions using the data that was scraped from Part I.
+
+All the details about the part can be found in `analysis.ipynb`.
+
+All the data that have been "processed" are stored under `/transformed/` the directory.
+
 # Libraries/Frameworks Used
 
-Scraper: Python, Beautiful Soup, Selenium, Pandas
+Part I - Job Scraper: Python, Beautiful Soup, Selenium, Pandas
 
-Data Analysis: Python, Jupyter Notebook, Pandas, Numpy, Matplotlib, Seaborn
+Part II - Data Analysis: Python, Jupyter Notebook, Pandas, Numpy, Matplotlib, Seaborn
 
 # Credits
 
