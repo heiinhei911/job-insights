@@ -1,6 +1,6 @@
 # Job Insights - Job Scraper & Data Analysis
 
-This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-depth analysis and visualization on current market data to uncover insights that can help job seekers and employers better understand employment trends.
+This is a customizable web scraper for full-time jobs on JobsDB.com HK with in-depth analysis and visualization of current market data to uncover insights that can help job seekers and employers better understand employment trends.
 
 This project is split into two parts: the **Job Scraper** and the **Data Analysis** using the data scraped from the first part.
 
@@ -39,7 +39,7 @@ The program in this part scrapes for full-time jobs that are found under a parti
 
 # Part II - Data Analysis
 
-This part involves data cleansing, exploratory data analysis, and some feature extractions using the data that was scraped from Part I.
+This part involves data cleaning, exploratory data analysis, and some feature extractions using the data that was scraped from Part I.
 
 All the details about the part can be found in `analysis.ipynb`.
 
