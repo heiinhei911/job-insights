@@ -94,7 +94,6 @@ def retrieve_jobs(job_listings_wrapper):
         # If current job ID can be found in the job_ids array, skip the current job
         # This way only UNIQUE jobs would be added into the job_listings array
         if job_id in job_ids:
-            print(f"{job_id}: skip")
             break
 
         # Proceed if job_id is unique

@@ -33,7 +33,7 @@ The program in this part scrapes for full-time jobs that are found under a parti
 
     _(This step could take quite a while depending on a number of factors such as the number of job postings you are scraping, your internet speed, the specification of your machine, etc.)_
 
-5.  Once all the pages have finished processing, all the data will be saved in _\[the keyword you have inputted in step 2\].csv_ under the `/jobs/` directory
+5.  Once all the pages have finished processing, all the data will be saved in _\[the keyword you have inputted in step 2\].csv_ under the `jobs/` directory
 
     ![Scraping Completed](./images/scraping_completed.png)
 
@@ -43,7 +43,7 @@ This part involves data cleaning, exploratory data analysis, and some feature ex
 
 All the details about the part can be found in `analysis.ipynb`.
 
-All the data that have been "processed" are stored under `/transformed/` the directory.
+All the data that have been "processed" are stored under `transformed/` the directory.
 
 # Libraries/Frameworks Used
 
