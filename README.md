@@ -45,7 +45,7 @@ All the details about the part can be found in `analysis.ipynb`.
 
 All the data that have been "processed" are stored under `transformed/` the directory.
 
-A dashboard with visualization of the analysis can be found [here](https://public.tableau.com/app/profile/hei.in.sam/viz/JobMarketInsightsAnalysesontheRoleofBusinessAnalystinHongKong/JobDataAnalyses).
+**A dashboard with visualization of the analysis can be found [here](https://public.tableau.com/app/profile/hei.in.sam/viz/JobMarketInsightsAnalysesontheRoleofBusinessAnalystinHongKong/JobDataAnalyses).**
 
 # Libraries/Frameworks Used
 
