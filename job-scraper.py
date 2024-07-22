@@ -115,6 +115,7 @@ def retrieve_jobs(job_listings_wrapper):
             # If the element with the "jobAdDetails" tag is not found in the DOM within 5 secs, throw an error
             print("ERROR: ", e)
 
+        # Extract job details from their respective locations
         job_card_details = list(job_cards[i].children)[-1]
         job_company_tag = job_card_details.select_one('a[data-automation="jobCompany"]')
         job_salary_tag = job_card_details.select_one('span[data-automation="jobSalary"] > span')
