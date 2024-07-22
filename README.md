@@ -51,7 +51,7 @@ A dashboard with visualization of the analysis can be found [here](https://publi
 
 Part I - Job Scraper: Python, Beautiful Soup, Selenium, Pandas
 
-Part II - Data Analysis: Python, Jupyter Notebook, Pandas, Numpy, Matplotlib, Seaborn
+Part II - Data Analysis: Python, Jupyter Notebook, Pandas, Matplotlib, Seaborn
 
 # Credits
 
